@@ -1,3 +1,14 @@
+template <int base>
+int digit_sum(int n)
+{
+	int sum = 0;
+	while (n > 0) {
+		sum += n % base;
+		n /= base;
+	}
+	return sum;
+}
+
 int gcd(int a,int b)
 {
 	if (a%b==0)
