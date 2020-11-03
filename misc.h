@@ -52,3 +52,8 @@ template<typename T> bool chmin(T& a, const T& b)
 	}
 	return false;
 }
+
+void answer(bool b)
+{
+	cout << (b ? "Yes" : "No") << endl;
+}
