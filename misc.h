@@ -57,3 +57,46 @@ void answer(bool b)
 {
 	cout << (b ? "Yes" : "No") << endl;
 }
+
+using irange = ipair;
+irange intersection(const irange& a, const irange& b)
+{
+	auto first = max(a.first, b.first);
+	auto second = min(a.second, b.second);
+	return irange(first, second);
+}
+
+bool intersects(const irange& a, const irange& b)
+{
+	auto x = intersection(a, b);
+	return x.first < x.second;
+}
+
+void soinsu(ll n, ll m, llvec& v)
+{
+	if (n == 1) return;
+	if (n != m && n < m * m) {
+		v.push_back(n);
+		return;
+	}
+
+	while (n >= m && (n % m) == 0) {
+		v.push_back(m);
+		n /= m;
+	}
+	soinsu(n, m + 1, v);
+}
+
+vector<llpair> soinsu2(llvec& v)
+{
+	ll x = 1;
+	vector<llpair> u;
+	for (auto& e : v) {
+		if (e > x) {
+			x = e;
+			u.emplace_back(e, 0);
+		}
+		u.back().second++;
+	}
+	return u;
+}
