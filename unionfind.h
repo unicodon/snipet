@@ -25,6 +25,7 @@ public:
 	}
 
 	bool same(int a, int b)	{ return root(a) == root(b); }
+	bool isRoot(int a) { return parent[a] == a; }
 private:
 	int root(int i) { return parent[i] == i ? i : parent[i] = root(parent[i]); }
 	std::vector<int> parent;
