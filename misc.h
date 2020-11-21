@@ -9,16 +9,41 @@ int digit_sum(int n)
 	return sum;
 }
 
-int gcd(int a,int b)
+ll gcd(ll a, ll b)
 {
-	if (a%b==0)
-	{
-		return(b);
-    }
+	if (a % b == 0)
+		return b;
 	else
-	{
-		return(gcd(b,a%b));
-    }
+		return gcd(b, a % b);
+}
+
+ll gcd(llvec::iterator begin, llvec::iterator end)
+{
+	auto inner = [&](auto& inner, ll a, llvec::iterator it) -> ll {
+		if (it == end)
+			return a;
+		a = gcd(a, *it++);
+		return inner(inner, a, it);
+	};
+	auto it = begin;
+	return inner(inner, *begin, ++it);
+}
+
+ll lcm(ll a, ll b)
+{
+	return a / gcd(a, b) * b;
+}
+
+ll lcm(llvec::iterator begin, llvec::iterator end)
+{
+	auto inner = [&](auto& inner, ll a, llvec::iterator it) -> ll {
+		if (it == end)
+			return a;
+		a = lcm(a, *it++);
+		return inner(inner, a, it);
+	};
+	auto it = begin;
+	return inner(inner, *begin, ++it);
 }
 
 bool isprim(long long A)
