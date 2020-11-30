@@ -49,8 +49,12 @@ ll lcm(llvec::iterator begin, llvec::iterator end)
 bool isprim(long long A)
 {
 	if (A == 1) return false;
+	if (A == 2) return true;
+	if (A % 2 == 0) return false;
+	if (A % 3 == 0) return false;
+	if (A % 5 == 0) return false;
 	float sq = sqrt(A);
-	long long n = 7;
+	long long n = 3;
 	while (n < sq) {
 		if (!(A % n))
 			return false;
