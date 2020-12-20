@@ -29,6 +29,27 @@ ll gcd(llvec::iterator begin, llvec::iterator end)
 	return inner(inner, *begin, ++it);
 }
 
+ll extgcd(ll a, ll b, ll &x, ll &y)
+{
+/*
+a = pb*q; // p = a / b, q = a % b
+
+ax + by
+ = pbx + qx + by
+ = b(px + y) + qx
+ = bY + qX // Y = px + y, X = x ->  y = Y - px
+*/
+
+	if (b == 0) {
+		x = 1;
+		y = 0;
+		return a;
+	}
+	ll d = extgcd(b, a % b, y, x);
+	y -= a / b * x;
+	return d;
+}
+
 ll lcm(ll a, ll b)
 {
 	return a / gcd(a, b) * b;
