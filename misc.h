@@ -122,7 +122,7 @@ bool intersects(const irange& a, const irange& b)
 	return x.first < x.second;
 }
 
-void soinsu(ll n, ll m, llvec& v)
+void soinsu_inner(ll n, llvec& v, ll m = 2)
 {
 	if (n == 1) return;
 	if (n != m && n < m * m) {
@@ -134,11 +134,13 @@ void soinsu(ll n, ll m, llvec& v)
 		v.push_back(m);
 		n /= m;
 	}
-	soinsu(n, m + 1, v);
+	soinsu_inner(n, v, m + 1);
 }
 
-vector<llpair> soinsu2(llvec& v)
+vector<llpair> soinsu(ll n)
 {
+	llvec v;
+	soinsu_inner(n, v);
 	ll x = 1;
 	vector<llpair> u;
 	for (auto& e : v) {
