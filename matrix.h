@@ -43,10 +43,10 @@ T operator*(const Vector<T, N>& lhs, const Vector<T, N>& rhs)
 }
 
 
-template<typename T, unsigned N>
+template<typename T, unsigned N, unsigned M = N>
 struct Matrix {
-	using VectorType = Vector<T, N>;
-	using MatrixType = std::array<Vector<T, N>, N>;
+	using VectorType = Vector<T, M>;
+	using MatrixType = std::array<VectorType, N>;
 	MatrixType val;
 
 	Matrix() = default;
@@ -60,7 +60,7 @@ struct Matrix {
 	{
 		int i = 0;
 		for(auto& e: in) {
-			val[i/N][i%N] = e;
+			val[i/M][i%M] = e;
 			i++;
 		}
 	}
@@ -87,18 +87,18 @@ struct Matrix {
 	{
 		Matrix m;
 		for (unsigned i = 0; i < N; i++)
-			for (unsigned j = 0; j < N; j++)
+			for (unsigned j = 0; j < M; j++)
 				m.val[i][j] = i == j ? (T)1 : (T)0;
 		return m;
 	}
 };
 
-template<typename T, unsigned N>
-Matrix<T,N> operator*(const Matrix<T,N>& lhs, const Matrix<T,N>& rhs)
+template<typename T, unsigned N, unsigned K, unsigned M>
+Matrix<T,N, M> operator*(const Matrix<T,N,K>& lhs, const Matrix<T,K,M>& rhs)
 {
 	Matrix<T,N> m;
 	for (unsigned i = 0; i < N; i++) {
-		for (unsigned j = 0; j < N; j++) {
+		for (unsigned j = 0; j < M; j++) {
 			T tmp = 0;
 			for (unsigned k = 0; k < N; k++)
 				tmp += lhs.val[i][k] * rhs.val[k][j];
