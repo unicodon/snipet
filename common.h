@@ -34,3 +34,12 @@ using llpair = pair<ll, ll>;
 
 void in() {} template <typename T, typename... Args> void in(T& t, Args& ...args) { cin >> t; in(args...); }
 void out() { cout << endl; } template <typename T, typename... Args> void out(const T& t, const Args& ...args) { cout << t; if (sizeof...(args)) cout << " "; out(args...); }
+
+#define THE_MOD 1'000'000'007
+
+constexpr ll LLINF = numeric_limits<ll>::max();
+
+template<class T> void sort(T& v) {	sort(v.begin(), v.end()); }
+template<class T> void rsort(T& v) { sort(v.begin(), v.end(), greater<typename T::value_type>()); }
+
+void YN(bool b) {	cout << (b ? "Yes" : "No") << endl; }
